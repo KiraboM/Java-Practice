@@ -3,13 +3,12 @@ import java.util.List;
 
 public class GraphTraversal{
 
-    public static List<Integer> dfs(Graph graph, int root, int[][] prerequisites, int numCourse){
+    public static List<Integer> dfs(Graph graph, int root){
         List<Integer> visited = new ArrayList<>();
-        List<Integer> courseList = new ArrayList<>();
         MyStack stack = new MyStack();
-        stack.push(root);
+        stack.push(root);// Add first vertex onto the stack
         while(!stack.isEmpty()){
-            int currentData = stack.pop();
+            int currentData = stack.pop();//Next visited vertex is the next vertex popped from the stack
             System.out.println(currentData);
             if (!visited.contains(currentData)) {
                 visited.add(currentData);
@@ -17,30 +16,16 @@ public class GraphTraversal{
                 Vertex currentVertex = graph.getVertex(currentData);
                 if (currentVertex != null) {
                     for (Edge e : currentVertex.getEdges()) {
+                        // Search every edge of the current vertex
                         Vertex nextVertex = e.getEndVertex();
-                        for(int i = 0; i < prerequisites.length; i++){
-                            if(prerequisites[i][0] == currentData && prerequisites[i][1] == nextVertex.getData()){
-                                if(!courseList.contains(currentData)){
-                                    courseList.add(currentData);
-                                    //System.out.println(courseList);
-                                }
-                                if(!courseList.contains(nextVertex.getData())){
-                                    courseList.add(nextVertex.getData());
-                                  // System.out.println(courseList);
-                                }
-                            }
-                        }
-                        if (!visited.contains(nextVertex.getData())) {
+                        if (!visited.contains(nextVertex.getData())) { // Check if the next vertex has already been visited
                             stack.push(nextVertex.getData());
+                            visited.add(nextVertex.getData());//Add all visited vertexes to the visited list
                         }
                     }
                 }
             }
         }
-        if(courseList.size() >= numCourse - 1){
-            return courseList;    
-        } else{
-            return new ArrayList<>(); //Return empty list if you can't reach all the courses
-        }
+        return visited; //Return list of visited vertices in the order they were visited
     }
 }
