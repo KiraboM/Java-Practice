@@ -1,0 +1,28 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class FordFulkerson{
+
+    public FordFulkerson(){}
+
+    public static abstract class networkFlowSolver{
+        protected List<Integer> path;
+        protected int flow;
+        protected int source;
+        protected int sink;
+        protected boolean solved;
+        protected int visitedToken;
+        protected List<Integer> visited;
+        protected int maxFlow;
+
+        protected int[][] capacity;
+
+        public networkFlowSolver(Graph graph, int source, int sink){
+            this.source = source;
+            this.sink = sink;
+            this.capacity = new int[graph.getNumVertices()][graph.getNumVertices()];
+        }
+
+    }
+
+    }

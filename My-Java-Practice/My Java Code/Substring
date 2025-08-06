@@ -1,0 +1,29 @@
+import java.util.Set;
+import java.util.HashSet;
+
+public class Substring{
+
+    public static int longestString(String word){
+        Set<Character> substring = new HashSet<>();
+        char[] chars = word.toCharArray();
+        int maxLength = 0;
+        for(int i = 0; i < chars.length; i++){
+            if(!substring.contains(chars[i])){
+                substring.add(chars[i]);
+            } else{
+                if (substring.size() > maxLength){
+                    maxLength = substring.size();
+                    substring.clear();
+                    substring.add(chars[i]);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    public static void main(String[] args){
+        System.out.println(longestString("abcabcbb"));
+        System.out.println(longestString("bbbbb"));
+        System.out.println(longestString("pwwkew"));
+    }
+}

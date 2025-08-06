@@ -1,0 +1,44 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class MyStack{
+    
+    private int top;
+    private ArrayList<Integer> Stack;
+
+    public MyStack(){
+        this.top = -1;
+        this.Stack = new ArrayList<>();
+
+    }
+
+    public void push(int item){
+        this.Stack.add(item);
+        this.top++;
+
+    }
+
+    public int pop(){
+        int poppedItem = this.Stack.get(this.top);
+        this.Stack.remove(poppedItem);
+        this.top--
+        return poppedItem;
+    }
+
+    public void printStack(){
+        System.out.println(this.Stack);
+    }
+
+    public static void main(String args){
+        MyStack Stack = new MyStack();
+        MyStack.push(4);
+        MyStack.push(8);
+        MyStack.push(6);
+        MyStack.push(12);
+        MyStack.pop(8);
+        MyStack.printStack();
+
+
+
+    }
+}

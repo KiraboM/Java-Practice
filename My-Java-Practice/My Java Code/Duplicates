@@ -1,0 +1,27 @@
+public class Duplicates{
+    /**
+     * Imports the List interface from the java.util package, which provides an ordered collection (also known as a sequence).
+     */
+    import java.util.List;
+    import java.util.ArrayList;
+
+    public List<Integer> findDuplicates(int[] nums){
+        List<Integer> duplicates = new ArrayList<>;
+        for(int i = 0; i < nums.length; i++){
+            for(int j = i + 1; j < nums.length; j++){
+                if(nums[i] == nums[j]){
+                    if(!duplicates.contains(nums[i])){
+                        duplicates.add(nums[i]);
+                    }
+                }
+            }
+        }
+        return duplicates;
+    }
+    public static void main(String[] args){
+        int[] nums = {4,3,4,5,6,3,8,6,9};
+        Duplicates myDuplicates = new Duplicates();
+        System.out.println(myDuplicates.findDuplicates(nums));
+    }
+
+}

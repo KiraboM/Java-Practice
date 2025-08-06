@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Graph{
+
+    private List<Vertex> vertices;
+    private List<Edge> edges;
+    private boolean directed;
+    private boolean weighted;
+
+    public Graph(boolean directed, boolean weighted){
+        this.directed = directed;
+        this.weighted = weighted;
+        this.vertices = new ArrayList<Vertex>();
+        this.edges = new ArrayList<Edge>();
+    }
+
+    public void addVertex(String data){
+        Vertex newVertex = new Vertex(data);
+        this.vertices.add(newVertex);
+    }
+
+    public void removeVertex(String data){
+        vertices.removeIf(vertex -> vertex.getData().equals(data));
+        edges.removeIf(edge -> edge.getStartVertex().getData().equals(data));
+    }
+
+    public void addEdge(Vertex startVertex, Vertex endvertex, int weight){
+        if(!this.weighted){
+            weight = 1; //Default weight for unweighted graphs
+        }
+        startVertex.addEdge(endVertex, weight);
+        if(!this.directed){
+            endVertex.addEdge(startVertex, weight);
+        }
+    }
+
+    public void removeEdge(Vertex startVertex, Vertex endVertex){
+        startVertex.removeEdge(endVertex);
+        if(!this.directed){
+            endVertex.removeEdge(startVertex);
+        }
+    }
+}

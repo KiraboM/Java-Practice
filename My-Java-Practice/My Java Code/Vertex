@@ -1,0 +1,34 @@
+import java.util.ArrayList
+import java.util.List;
+
+public class Vertex{
+
+    private String data;
+    private List<Edge> edges;
+
+    public Vertex(String data){
+        this.data = data;
+        this.edges = new ArrayList<>();
+    }
+
+    public String getData(){
+        return this.data;
+    }
+
+    public void setData(String data){
+        this.data = data;
+    }
+
+    public void addEdge(Vertex vertex, int weight){
+        Edge newEdge = new Edge(this, vertex, weight);
+        this.edges.add(newEdge);
+    }
+
+    public void removeEdge(Vertex vertex){
+        edges.removeIf(edge -> edge.getEndVertex().equals(vertex));
+    }
+
+    public List<Edge> getEdges(){
+        return this.edges;
+    }
+}

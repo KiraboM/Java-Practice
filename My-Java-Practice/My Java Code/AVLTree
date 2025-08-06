@@ -1,0 +1,59 @@
+public class AVLTree extends TreeNode{
+
+    private TreeNode root;
+    private int height;
+
+    public AVLTree(int data){
+        super(data);
+        this.root = new TreeNode(data);
+        this.height = 1;
+    }
+
+    public void insert(int data){
+        this.root = insert(data, this.root);
+        this.root.setHeight(updateHeight(this.root));
+
+    }
+
+    public void setHeight(int height){
+        this.height = height;
+    }
+
+    public int updateHeight(TreeNode node){
+        if(node == null){
+            return 0;
+        } else{
+            int maxHeight = MaxHeight = Math.max(updateHeight(node.left), updateHeight(node.right));
+            return maxHeight + 1;
+        
+        }
+    }
+
+    public void Rotation(TreeNode node){
+        int balance = getBalance(node);
+        if(balance > 1){
+            if(getBalance(node.left) < 0){
+                node.left = rotateLeft(node.left);
+            }
+        } else if(balance < -1){
+            if(getBalance(node.right) > 0){
+                node.right = rotateRight(node.right);
+            }
+        }
+    }
+
+    public int getBalance(TreeNode node){
+        if(node == null){
+            return 0;
+        } else[
+            return updateHeight(node.left) - updateHeight(node.right);
+        ]
+    }
+
+
+    
+
+
+
+
+}

@@ -1,0 +1,36 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class HasPath{
+
+    public boolean hasPath(Graph graph, String source, String destination){
+        boolean pathFound = false;
+        List<String> visited = new ArrayList<>();
+        MyStack stack = new MyStack();
+        stack.push(source);
+        while(!stack.isEmpty()){
+            String currentData = stack.pop();
+            if (!visited.contains(currentData)) {
+                visited.add(currentData);
+                // Get the current vertex from the graph
+                Vertex currentVertex = graph.getVertex(currentData);
+                if (currentVertex != null) {
+                    for (Edge e : currentVertex.getEdges()) {
+                        Vertex nextVertex = e.getEndVertex();
+                        //Check is the next vertex is the destination
+                        if(nextVertex.getData().equals(destination)){
+                            pathFound = true;
+                            return pathFound;
+                        }
+                        if (!visited.contains(nextVertex.getData())) {
+                            stack.push(nextVertex.getData());
+                        }
+                    }
+                }
+            }
+        }
+        return pathFound;
+    }
+
+
+}

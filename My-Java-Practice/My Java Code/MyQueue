@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+
+public class MyQueue{
+
+    public MyQueue(){
+        int front = -1;
+        int rear = -1;
+        public ArrayList<Integer> queue = new ArrayList<>();
+        public MyStack stack1 = new MyStack();
+        public MyStack stack2 = new MyStack();
+
+    }
+
+    public void enqueue(int item){
+        stack1.push(item);
+        if(this.front == -1){
+            this.front = 0;
+        }
+        this.rear++;
+    }
+
+    public int dequeue(){
+        if(this.front == -1 || this.front > this.rear){
+            return -1; //Queue is empty
+        } else{
+            if(stack2.top < 0){
+                while(stack1.top > -1){
+                    stack2.push(stack1.pop());
+                }
+            }
+            return stack2.pop();
+        }
+    }
+
+    public void printQueue(){
+        if(front == -1){
+            System.out.println("Queue is empty");
+        } else{
+            System.out.println(queue);
+        }
+    }
+    public static main(String args[]){
+        MyQueue queue = new MyQueue();
+        queue.enqueue(3);
+        queue.enqueue(7);
+        queue.enqueue(1);
+        queue.enqueue(6);
+        queue.enqueue(10);
+        queue.enqueue(12);
+
+    }
+
+}

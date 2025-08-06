@@ -1,0 +1,81 @@
+import java.util.ArrayList;
+
+public class VertexQueue{
+
+    private int front;
+    private int rear;
+    private MyStack stack1;
+    private MyStack stack2;
+
+    public VertexQueue(){
+        this.front = -1;
+        this.rear = -1;
+        this.stack1 = new MyStack();
+        this.stack2 = new MyStack();
+
+    }
+
+    public void enqueue(Vertex item){
+        this.stack1.push(item);
+        if(this.front == -1){
+            this.front = 0;
+        }
+        this.rear++;
+    }
+
+    public String dequeue(){
+        if(this.front == -1 || this.front > this.rear){
+            return null; //Queue is empty
+        } else{
+            if(this.stack2.getTop() < 0){
+                while(stack1.getTop() > -1){
+                    stack2.push(stack1.pop());
+                }
+            }
+            return stack2.pop();
+        }
+    }
+
+    public void printQueue(){
+        if(this.front == -1){
+            System.out.println("Queue is empty");
+        } else{
+            ArrayList<String> temp = new ArrayList<>();
+            while(this.stack2.getTop() >= 0){
+                temp.add(this.stack2.pop());
+            }
+            for(String item : temp){
+                System.out.print(item + ",");
+            }
+            while(temp.size() > 0){
+                this.stack2.push(temp.remove(temp.size()-1));
+            }
+            while(stack1.getTop() >= 0){
+                temp.add(this.stack2.pop());
+            }
+            for(String item : temp){
+                System.out.print(item + ",");
+            }
+            while(temp.size() > 0){
+                this.stack1.push(temp.remove(temp.size()-1));
+            }
+            
+        }
+    }
+
+    public static void main(String[] args){
+        MyQueueJava queue = new MyQueueJava();
+        queue.enqueue("A");
+        queue.enqueue("B");
+        queue.enqueue("C");
+        queue.enqueue("D");
+        queue.enqueue("E");
+        queue.enqueue("F");
+        queue.enqueue("G");
+        queue.dequeue();
+
+        queue.printQueue();
+
+    }
+
+}

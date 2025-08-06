@@ -1,0 +1,14 @@
+public class GraphTraversal{
+
+    public static void dfs(Graph graph, String root){
+        List<Vertex> visited = new ArrayList<>();
+        MyStack stack = new MyStack();
+        stack.push(root.getData());
+        visited.add(root);
+        while(!stack.isEmpty()){
+            String currentData = stack.pop();
+            for(Edge edge :)
+
+        }
+    }
+}

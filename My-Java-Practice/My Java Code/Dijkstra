@@ -1,0 +1,40 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Hashmap;
+import java.util.Dictionaty;
+
+public class Dijkstra{
+
+    public static Dictionary[] Dijkstra(Graph graph, Vertex root){
+        Dictionary<String, Integer> distances = new HashMap<>();
+        Dictionary<String, Vertex> previous = new HashMap<>();
+        VertexQueue queue = new VertexQueue();
+        queue.enqueue(root);
+
+        for(Vertex vertex : graph.getVertices()){
+            if(vertex.equals(root)){
+                distances.put(vertex.getData(), 0);
+            } else{
+                previous.put(vertex.getData(), null);
+            }
+        }
+        distances.put(root.getData(), 0)
+
+        while(!queue.isEmpty()){
+            Vertex current = queue.dequeue();
+            for(Edge edge : current.getEdges()){
+                int newDistance = distances.get(current.getData() + edge.getWeight());
+                Vertex neighbor = edge.getEndVertex();
+                if(newDistance < distances.get(neighbor.getData())){
+                    distances.put(neighbor.getData(), newDistance);
+                    previous.put(neighbor.getData(), current);
+                    if(!queue.contains(neighbor)){
+                        queue.enqueue(neighbor);
+                    }
+                }
+            }
+        }
+
+        return Dictionary[](distances, previous);
+    }
+}
