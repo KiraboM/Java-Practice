@@ -15,6 +15,10 @@ public class MyStack{
 
     }
 
+    public boolean contains(int data){
+        return stack.contains(data);
+    }
+
     public int getTop(){
         return this.top;
     }

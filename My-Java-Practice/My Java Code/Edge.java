@@ -19,6 +19,7 @@ public class Edge{
     public int remainingCapacity(){
         return this.weight - this.flow;
     }
+    
 
     public int augment(int flow){
         if(flow > remainingCapacity()){
