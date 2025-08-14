@@ -1,0 +1,19 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Bombs{
+
+    public static int findBombs(int[][] bombs){
+        Graph graph = new Graph(true, false);//Graph to represent the boms
+        List<Integer> detonated = new ArrayList<>();//Keep track of every bomb that has been dealt with
+        for(int i = 0; i < bombs.legnth; i++){//Recursively adding each bomb as a vertex in graph
+            Vertex v = graph.addVertex(i);
+        }
+        int j = 0;
+        while(detonated.size() < bombs.length){
+            int radius = bombs[j][2]; //Get blast radius of the current bomb
+            Vertex startVertex = graph.getVertex(j);
+            Vertex endVertex = endBomb(bombs, radius, startVertex)
+            }
+    }
+}

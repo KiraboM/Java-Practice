@@ -4,7 +4,7 @@ public class MyQueueJava{
 
     private int front;
     private int rear;
-    private ArrayList<String> queue;
+    private ArrayList<Integer> queue;
     private MyStack stack1;
     private MyStack stack2;
 
@@ -42,11 +42,11 @@ public class MyQueueJava{
         if(this.front == -1){
             System.out.println("Queue is empty");
         } else{
-            ArrayList<String> temp = new ArrayList<>();
+            ArrayList<Integer> temp = new ArrayList<>();
             while(this.stack2.getTop() >= 0){
                 temp.add(this.stack2.pop());
             }
-            for(String item : temp){
+            for(Integer item : temp){
                 System.out.print(item + ",");
             }
             while(temp.size() > 0){
@@ -55,7 +55,7 @@ public class MyQueueJava{
             while(stack1.getTop() >= 0){
                 temp.add(this.stack2.pop());
             }
-            for(String item : temp){
+            for(Integer item : temp){
                 System.out.print(item + ",");
             }
             while(temp.size() > 0){

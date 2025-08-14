@@ -1,0 +1,8 @@
+public class TreeConverter{
+
+    public int[] Convert(int[] BST){
+        for(int i = 0; i < BST.length; i++){
+            
+        }
+    }
+}

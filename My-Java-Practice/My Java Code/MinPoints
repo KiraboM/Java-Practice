@@ -1,0 +1,21 @@
+
+
+public class MinPoints{
+
+    public int minDistance(int[][] coordinates){
+        Graph graph = new graph(false, true);
+        for(int i = 0; i < coordinates.length - 1; i++){
+            for(int j = i + 1; i < coordinates.length; j++){
+                int weight = ((coordinates[i][0] - coordinates[j][0]) + (coordinates[i][1] - coordinates[j][1]));
+                Vertex v1 = graph.addVertex(i);
+                Vertex v2 = graph.addVertex(j);
+                graph.addEdge(v1, v2, weight);
+            }
+        }
+        return(MinimumSpanningTree.findMinimum(graph, graph.getVertex(0)));
+    }
+    public static void main(String[] args){
+        int[][] coordinates = {{0,0}{2,2}{3,10}{5,2}{7,0}};
+        System.out.println(MinPoints.minDistance(coordinates));
+    }
+}

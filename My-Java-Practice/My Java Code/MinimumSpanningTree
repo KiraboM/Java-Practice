@@ -1,0 +1,35 @@
+import java.util.PriorityQueue;
+import java.util.List
+import java.util.ArrayList;
+
+public class MinimumSpanningTree{
+
+    public int findMinimum(Graph graph, Vertex root){
+        int totalCost, edgeCount = 0;
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>();
+        List<Vertex> visited = new ArrayList<>();
+        visited.add(root);
+        for(Edge edge : root.getEdges()){
+            priorityQueue.add(edge);
+        }
+        while(!priorityQueue.isEmpty() && edgeCount < graph.getVertices().size() - 1){
+            Edge edge = priorityQueue.poll();
+            Vertex vertex = edge.getEndVertex();
+            if(!visited.contains(vertex)){
+                visited.add(vertex);
+                totalCost += edge.getWeight();
+                edgeCount++;
+                for(Edge e : vertex.getEdges()){
+                    if(!visited.contains(e.getVertex)){
+                        priorityQueue.add(e);
+                    }
+                }
+            }
+        }
+        if(edgeCount = graph.getVertices().size() - 1){
+            return totalCost;
+        } else{
+            return -1; //Graph has no spanning tree
+        }
+        }
+    }

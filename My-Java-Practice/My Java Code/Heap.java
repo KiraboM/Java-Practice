@@ -1,4 +1,3 @@
-
 public class Heap{
 
     private int[] heap;
@@ -30,7 +29,7 @@ public class Heap{
         }
         }
 
-    public int poll(){
+    public int poll(){//Retrieve largest item and remove it from the heap
         if(this.size < 0){
             return -1;
         } else{
@@ -67,13 +66,13 @@ public class Heap{
         if(i*2 + 1 > this.size || i*2 + 1 <= 0){
             return;
         } else{
-            if(this.heap[i*2 + 1] < this.heap[i]){
+            if(this.heap[i*2 + 1] > this.heap[i]){
                 int temp = this.heap[i*2 + 1];
                 this.heap[i*2 + 1] = this.heap[i];
                 this.heap[i] = temp;
                 heapifyDown(i);
                 heapifyDown(i*2+1);
-            } else if(this.heap[i*2 + 2] < this.heap[i]){
+            } else if(this.heap[i*2 + 2] > this.heap[i]){
                 int temp = this.heap[i*2 + 2];
                 this.heap[i*2 + 2] = this.heap[i];
                 this.heap[i] = temp;
@@ -87,7 +86,7 @@ public void heapifyUp(int i){
         if((i - 1)/2 < 0){
             return;
         } else{
-            if(this.heap[i] < this.heap[(i-1)/2]){
+            if(this.heap[i] > this.heap[(i-1)/2]){
                 int temp = this.heap[(i-1)/2];
                 this.heap[(i-1)/2] = this.heap[i];
                 this.heap[i] = temp;

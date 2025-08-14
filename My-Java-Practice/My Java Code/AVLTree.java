@@ -6,14 +6,30 @@ public class AVLTree extends TreeNode{
     public AVLTree(int data){
         super(data);
         this.root = new TreeNode(data);
-        this.height = 1;
+        this.root.setHeight(1); //Height of root node is initially one
+    }
+
+    public TreeNode getRoot(){
+        return this.root;
     }
 
     public void insert(int data){
         this.root = insert(data, this.root);
         this.root.setHeight(updateHeight(this.root));
+        Rotation(this.root);
 
     }
+    @Override
+
+    public void inOrderTraversal(TreeNode node){
+        if(node != null){
+            inOrderTraversal(node.left);
+            System.out.print(node.data + "->");
+            inOrderTraversal(node.right);
+
+        }
+    }
+    @Override
 
     public void setHeight(int height){
         this.height = height;
@@ -25,7 +41,6 @@ public class AVLTree extends TreeNode{
         } else{
             int maxHeight = Math.max(updateHeight(node.left), updateHeight(node.right));
             return maxHeight + 1;
-        
         }
     }
 
@@ -35,17 +50,21 @@ public class AVLTree extends TreeNode{
             if(getBalance(node.left) < 0){
                 node.left = rotateLeft(node.left);
             }
+            node = rotateRight(node);
         } else if(balance < -1){
             if(getBalance(node.right) > 0){
                 node.right = rotateRight(node.right);
             }
+            node = rotateLeft(node);
         }
     }
 
     public TreeNode rotateRight(TreeNode node){
         TreeNode leftNode = node.left;
+        TreeNode centerNode = leftNode.right;
         leftNode.right = node;
-        node.left = leftNode.right;
+        node.left = centerNode;
+        //Update heights after rotation
         node.setHeight(updateHeight(node));
         leftNode.setHeight(updateHeight(leftNode));
         return leftNode;
@@ -53,8 +72,10 @@ public class AVLTree extends TreeNode{
 
     public TreeNode rotateLeft(TreeNode node){
         TreeNode rightNode = node.right;
+        TreeNode centerNode = rightNode.left;
         rightNode.left = node;
-        node.right = rightNode.left;
+        node.right = centerNode;
+        //Update heights after rotation
         node.setHeight(updateHeight(node));
         rightNode.setHeight(updateHeight(rightNode));
         return rightNode;
@@ -68,6 +89,8 @@ public class AVLTree extends TreeNode{
        }
     }
 
+    
+
     public static void main(String[] args) {
         AVLTree avlTree = new AVLTree(5);
         avlTree.insert(8);
@@ -75,6 +98,7 @@ public class AVLTree extends TreeNode{
         avlTree.insert(2);
         avlTree.insert(9);
         avlTree.insert(5);
+        avlTree.inOrderTraversal(avlTree.getRoot());
 
 
     }

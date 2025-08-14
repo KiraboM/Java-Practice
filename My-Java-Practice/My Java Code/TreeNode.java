@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class TreeNode{
 
@@ -12,10 +14,6 @@ public class TreeNode{
         this.right = null;
         this.height = 1; //Height of new node is 1
     }
-
-    public void setHeight(int height){
-        this.height = height;
-    }
     
     public TreeNode insert(int data, TreeNode root){
         if(root == null){
@@ -27,6 +25,10 @@ public class TreeNode{
             root.left = insert(data, root.left);
         }
         return root;
+    }
+
+    public void setHeight(int height){
+        this.height = height;
     }
 
     public TreeNode delete(int data, TreeNode root){
@@ -66,6 +68,48 @@ public class TreeNode{
         }
         return root;
     }
+    //Create in-order traversal of the tree
+    public void inOrderTraversal(TreeNode root){
+        if(root == null){
+            return;
+        } else{
+            inOrderTraversal(root.left);
+            System.out.print(root.data + "->");
+            inOrderTraversal(root.right);
+        }
+    }
+
+    public List<Integer> search(int data, TreeNode root){
+        List<Integer> result =  new ArrayList<>();
+        //Cheking if tree is empty
+        if(root == null){
+            return new ArrayList<>(); //Item not found  
+        //Recursively searching for the item   
+        } else if(root.data > data){
+            return search(data, root.left);
+        } else if(root.data < data){
+            return search(data, root.right);
+        } else {
+            MyQueueNode queue = new MyQueueNode();
+            result.add(root.data);
+            queue.enqueue(root);
+            //Preforming a BST to return the subtree of the found value
+            while(!queue.isEmpty()){
+                TreeNode current = queue.dequeue();
+                if(current.left != null){
+                    result.add(current.left.data);
+                    queue.enqueue(current.left);
+                }
+                if(current.right != null){
+                    result.add(current.right.data);
+                    queue.enqueue(current.right);
+                }
+            }
+        return result;
+
+
+        }
+    }
 
     public boolean ValidateBST(TreeNode root, int min, int max){
         boolean isValid = true;
@@ -88,6 +132,17 @@ public class TreeNode{
             
         }
 
+        public static void main(String[] args) {
+            TreeNode root = new TreeNode(4);
+            root.insert(2, root);
+            root.insert(7, root);
+            root.insert(1, root);
+            root.insert(3, root);
+            System.out.println(root.search(2, root));
+        }
+
     
     }
+
+    
     

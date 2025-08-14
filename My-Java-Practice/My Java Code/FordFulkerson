@@ -16,6 +16,7 @@ public class FordFulkerson{
         protected int[][] capacity;
 
         public FordFulkerson(Graph graph, Vertex source, Vertex sink){
+            this.graph = graph;
             this.source = source;
             this.sink = sink;
             this.capacity = new int[graph.getNumVertices()][graph.getNumVertices()];

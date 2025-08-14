@@ -1,0 +1,29 @@
+public class QueueObjectEdge implements Comparable<QueueObject>{
+    private Edge edge;
+    private int priority;
+
+    public QueueObject(Edge edge, int priority){
+        this.edge = edge;
+        this.priority = priority;
+    }
+
+    public Edge getVertex(){
+        return this.edge;
+    }
+
+    public int getPriority(){
+        return this.priority;
+    }
+
+    public int compareTo(QueueObject object){
+        if(this.priority == object.getPriority()){
+            return 0;
+        } else if(this.priority < object.getPriority()){
+            return -1;
+        } else{
+            return 1;
+        }
+    }
+
+
+}
