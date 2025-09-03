@@ -16,7 +16,7 @@ public class Heap{
 
     public void add(int item){
         if(this.size >= this.capacity){
-            System.out.println("Heap is full");
+            System.out.println("Heap is full");//Check if heap if full
         } else{
             if(this.size < 0){
                 this.size++;
@@ -24,7 +24,7 @@ public class Heap{
             } else{
                 this.size++;
                 this.heap[this.size] = item;
-                this.heapifyUp(this.size);
+                this.heapifyUp(this.size);//Restoring the heap property
             }
         }
         }

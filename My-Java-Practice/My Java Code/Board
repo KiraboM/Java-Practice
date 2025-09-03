@@ -1,0 +1,29 @@
+public class Board{
+
+    protected int[][] myBoard;
+
+    public Board(){
+        this.myBoard = new int[3][3]
+    }
+
+    public void initialise(){
+        //Set each cell in the board to a number from 1 to 9
+        int num  = 1;
+        for(int i = 0; i < this.myBoard.length; i++){
+            for(int j = 0; j < this.myBoard[i].length; j++){
+                this.myBoard[i][j] = num;
+                num++;
+            }
+        }
+    }
+
+    public void printBoard(){
+        //Print the board in a grid format
+        for(int i = 0; i < this.myBoard.length; i++){
+            for(int j = 0; j < this.myBoard[i].length; j++){
+                System.out.print(this.myBoard[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
+}

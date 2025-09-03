@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Graph{
@@ -70,7 +71,29 @@ public class Graph{
 
     public static void main(String[] args) {
 
+        Graph graph = new Graph(true, true);
+        Vertex v1 = graph.addVertex(1);
+        Vertex v2 = graph.addVertex(2);
+        Vertex v3 = graph.addVertex(3);
+        Vertex v4 = graph.addVertex(4);
+        Vertex v5 = graph.addVertex(5);
+        Vertex v6 = graph.addVertex(6);
+        Vertex v7 = graph.addVertex(7);
+        graph.addEdge(v1, v2, 3);
+        graph.addEdge(v1, v3, 6);
+        graph.addEdge(v2, v3, 1);
+        graph.addEdge(v3, v5, 7);
+        graph.addEdge(v2, v4, 5);
+        graph.addEdge(v5, v6, 2);
+        graph.addEdge(v6, v7, 3);
+        graph.addEdge(v3, v7, 10);
+        HashMap<String, HashMap> results = Dijkstra.dijkstra(graph, v1);
+        results.get("distances").forEach((key, value) ->{
+            System.out.println("Vertex: " + key + " Distance from root node: " + value);
+        });
+
       
        
         }
+    
     }

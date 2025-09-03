@@ -3,9 +3,10 @@ import java.util.PriorityQueue;
 
 public class Dijkstra{
 
-    public static HashMap dijkstra(Graph graph, Vertex root){
+    public static HashMap<String, HashMap> dijkstra(Graph graph, Vertex root){
         HashMap<Integer, Integer> distances = new HashMap<>(); // Meant to store each vertex and its associated path from the root vertex
         HashMap<Integer, Vertex> previous = new HashMap<>();//Keeps track of all previous vertices visited
+
         PriorityQueue<QueueObject> queue = new PriorityQueue<>(); //Used to dertermine the next vertex visited
         queue.add(new QueueObject(root, 0));
         //Initialising the HashMap

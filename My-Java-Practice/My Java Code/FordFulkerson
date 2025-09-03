@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FordFulkerson{
         protected List<Integer> path;
@@ -19,24 +21,68 @@ public class FordFulkerson{
             this.graph = graph;
             this.source = source;
             this.sink = sink;
-            this.capacity = new int[graph.getNumVertices()][graph.getNumVertices()];
-            this.visited = new int[graph.getNumVertices()];
-            this.maxFlow = Integer.MIN_VALUE;
         }
 
-        public void solve(){
-            for(int f = dfs(this.source, Integer.MAX_VALUE); f !=0; f = dfs(this.source, Integer.MAX_VALUE)){
-                this.visitedToken++;
-                this.maxFlow += f;
+        //Helper method to find augmenting path from source to sink
+        public Map<Vertex, Edge>findAugemtingPath(Graph graph, Vertex source, Vertex sink){
+            //Use a BFS to find the augmenting path
+            Map<Vertex, Edge> path = new HashMap<>();
+            MyQueue<Vertex> queue = new MyQueue<>();
+            queue.enqueue(source);
+            path.put(source, null);
+            while(!queue.isEmpty()){
+                Vertex current = queue.dequeue();
+                for(Edge e : current.getEdges()){
+                    Vertex neighbor = e.getEndVertex();
+                    if(!path.containsKey(neighbor) && e.getWeight() > 0){
+                        path.put(neighbor, e);
+                        queue.enqueue(neighbor);
+                        if(neighbor == sink){
+                            return path;
+                        }
+                    }
+                }
             }
+
         }
-        public static int dfs(Vertex Vertex, int flow){
-            if(Vertex == this.sink){
-                return flow;
+
+        public int getMaxFlow(){
+            int maxFlow = 0;
+            while(findAugemtingPath(this.graph, this.source, this.sink) != null){
+                Map<Vertex, Edge> path = findAugmentingPath(this.graph, this.source, this.sink);
+                int pathFlow = Integer.MAX_VALUE;
+                Vertex v = this.sink;
+                while(v != this.source){
+                    Edge edge = path.get(v);
+                    if(edge == null){
+                        break; //No path found
+                    }
+                    pathFlow = Math.min(pathFlow, edge.getWeight());
+                    v = edge.getStartVertex();
+                }
+                //Augment flow along the path and update the edges
+                v = this.sink
+                while(v != this.source){
+                    Edge edge = path.get(v);
+                    if(edge == null){
+                        break;
+                    }
+                    edge.augment(pathFlow);
+                    v = edge.getStartVertex();
+
+                }
+                maxFlow += pathFlow;
             }
+            return maxFlow;
+        }
+
+        public static void main(String[] args){
+            Graph graph = new Graph();
+            Vertex v1 = graph.addVertex(1);
+        }
 
 
 
     }
 
-    }
+    

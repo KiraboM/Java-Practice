@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class TopologicalSort{ 
+    
+    public int[] sort(Graph graph){
+        int[] sortedList = new int[graph.getVertices().size()];
+        int index = graph.getVertices().size() - 1;
+        Stack<Integer> stack = new Stack<>();
+        List<Integer> visited = new ArrayList<>();
+        for(Vertex v : graph.getVertices()){
+            if(!visited.contains(v.getData())){
+                tdfs(graph, v.getData(), visited, stack);
+                while(!stack.isEmpty()){
+                    sortedList[index--] = stack.pop();
+                }
+            }
+        }
+        return sortedList;
+    }
+
+    public void tdfs(Graph graph, int root, List<Integer, Stack<Integer> stack){
+        visited.add(root);
+        Vertex current = graph.getVertex(root);
+        for(Edge e : current.getEdges()){
+            Vertex next = e.getEndVertex();
+            if(!visited.contains(next.getData())){
+                visited.add(next.getData());
+                tdfs(graph, next.getData(), visited, stack)
+            }
+        }
+        stack.push(root);
+    }
+}

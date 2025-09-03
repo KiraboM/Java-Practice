@@ -28,7 +28,7 @@ public class ListNode{
             if(root.getData() == n){
                 return root.getData(); //element found
             } else{
-                return retrieve(n, root.next);
+                return retrieve(n, root.next);//Recursive call to search next node in list
             }
             }
         }
@@ -43,13 +43,21 @@ public class ListNode{
             insert(n, root.next);
         }
         }
+    
+    public ListNode insertAtStart(int n, ListNode root){
+        ListNode newNode = new ListNode(n);
+        newNode.next = root;
+        root = newNode;
+        return root;
+    }
     public int delete(int n, ListNode root){
         if (root == null){
             System.out.println("Element not found");
             return -1;
         } else{
             if(root.data == n){
-                root.data = -1;
+                root.data = root.next.data;
+                root.next = root.next.next;
                 return n;
 
             } else{
@@ -115,9 +123,11 @@ public class ListNode{
         root.insert(6,root);
         root.insert(2,root);
         root.insert(8,root);
-        root.insert(6,root);
+        root = root.insertAtStart(6,root);
         root.printList(root);
-        root = root.reverseList(root);
+       // root.delete(2, root);
+        root.delete(8, root);
+        //root = root.reverseList(root);
         root.printList(root);
     
     }

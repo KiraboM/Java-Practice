@@ -9,7 +9,7 @@ public class Kosaraju {
 
         MyStack stack = Kdfs(graph, root);
         //Use the stack to find the strongly connected components
-        List<List<Integer>> sccList = new ArrayList<>();// Store a list of the scc's foudn
+        List<List<Integer>> sccList = new ArrayList<>();// Store a list of the scc's found
         Set<Integer> visited = new HashSet<>();
         Graph transposedGraph = transposeGraph(graph);//Transpose the given graph
         while(!stack.isEmpty()){

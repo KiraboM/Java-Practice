@@ -1,10 +1,9 @@
-public class AVLTree extends TreeNode{
+public class AVLTree{
 
     private TreeNode root;
     
 
     public AVLTree(int data){
-        super(data);
         this.root = new TreeNode(data);
         this.root.setHeight(1); //Height of root node is initially one
     }
@@ -13,13 +12,21 @@ public class AVLTree extends TreeNode{
         return this.root;
     }
 
-    public void insert(int data){
-        this.root = insert(data, this.root);
-        this.root.setHeight(updateHeight(this.root));
-        Rotation(this.root);
+    public void insert(int data, TreeNode node){
+        if(node == null){
+            node = new TreeNode(data);
+            node.setHeight(updateHeight(node));
+            Rotation(node);
+        } else if(data < node.data){
+            insert(data, node.left);
+        } else if(data > node.data){
+            insert(data, node.right);
+        } else{
+            System.out.println("Duplicate data not allowed");
+            return;
+        }
 
     }
-    @Override
 
     public void inOrderTraversal(TreeNode node){
         if(node != null){
@@ -28,11 +35,6 @@ public class AVLTree extends TreeNode{
             inOrderTraversal(node.right);
 
         }
-    }
-    @Override
-
-    public void setHeight(int height){
-        this.height = height;
     }
 
     public int updateHeight(TreeNode node){
@@ -93,11 +95,11 @@ public class AVLTree extends TreeNode{
 
     public static void main(String[] args) {
         AVLTree avlTree = new AVLTree(5);
-        avlTree.insert(8);
-        avlTree.insert(3);
-        avlTree.insert(2);
-        avlTree.insert(9);
-        avlTree.insert(5);
+        avlTree.insert(1, avlTree.getRoot());
+        avlTree.insert(2, avlTree.getRoot());
+        avlTree.insert(8, avlTree.getRoot());
+        avlTree.insert(4, avlTree.getRoot());
+        avlTree.insert(6, avlTree.getRoot());
         avlTree.inOrderTraversal(avlTree.getRoot());
 
 

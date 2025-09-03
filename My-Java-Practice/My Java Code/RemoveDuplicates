@@ -1,6 +1,9 @@
 import java.util.Arrays;
-public class MergeSort{
-    
+
+public class RemoveDuplicates{
+
+    public RemoveDuplicates(){}
+
     public void mergeSort(int[] array){
         if(array.length < 2){
             return; //Array is already sorted
@@ -30,10 +33,15 @@ public class MergeSort{
                 array[k] = left[i];
                 i++;
                 k++;
-            } else if(left[i] >= right[j]){
+            } else if(left[i] > right[j]){
                 array[k] = right[j];
                 j++;
                 k++;
+            } else if(left[i] == right[j]){
+                array[k] = left[i];
+                k++;
+                i++;
+                j++//Skip the duplicate
             }
         }
         if(i < left.length){
@@ -54,16 +62,11 @@ public class MergeSort{
         }
     }
 }
-  public static void main(String[] args){
-      MergeSort sorter = new MergeSort();
-      int[] array = {1,9,3,1,5,5,9,3,6};
-      System.out.println(Arrays.toString(array));
-   //   System.out.println("Array before sorting:");
-    //  for(int i = 0; i < array.length; i++){
-    //    System.out.print(array[i] + " , ");
-     // }
-      sorter.mergeSort(array);
-      System.out.println("Array after sorting:");
-      System.out.println(Arrays.toString(array));
-  }
-} 
+    public static void main(String[] args){
+        RemoveDuplicates remover = new RemoveDuplicates();
+        int[] array = {1,9,3,1,5,5,9,3,6};
+        remover.mergeSort(array);
+        System.out.println(Arrays.toString(array));
+
+    }
+}
